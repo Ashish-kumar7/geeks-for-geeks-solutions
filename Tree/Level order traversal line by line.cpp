@@ -1,7 +1,4 @@
 
-
-
-
   
   void levelOrder(Node* node)
 {
@@ -33,10 +30,13 @@
         {
             q2.push(temp->right);
         }
- 
+          count5++;
       }
+      if(count5>0)
       {
-     
+        cout<<"$"<<" ";
+         
+      }
       while(!q2.empty())
       {
           Node * temp=q2.front();
@@ -52,6 +52,11 @@
         {
             q1.push(temp->right);
         }
+        count6++;
       }
- }
+if(count6>0)
+      {
+        cout<<"$"<<" ";
+         
+      }  }
 }
