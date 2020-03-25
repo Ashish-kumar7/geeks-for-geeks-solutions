@@ -1,25 +1,31 @@
-void fillingofmap(Node * root,int depth,int level,map<int,pair<int,int>>&mp){
+
+void view(Node * root,int hd,int depth,map<int,pair<int,int>>&mp){
     if(root==NULL){
-        return;
+        return ;
     }
-    if(mp.find(depth)==mp.end()){
-        mp[depth]=make_pair(root->data,level);
+    if(mp.find(hd)==mp.end()){
+        mp[hd]=make_pair(root->data,depth);
     }
-    else if(mp[depth].second<=level){
-        mp[depth]=make_pair(root->data,level);
+    else if(mp[hd].second <=depth){
+        mp[hd]=make_pair(root->data,depth);
     }
-    fillingofmap(root->left,depth-1,level+1,mp);
-    fillingofmap(root->right,depth+1,level+1,mp);
-}
-void bottomView(struct Node *root){
-    map<int,pair<int,int>>mp;
-    int depth=0;
-    int level=0;
-    fillingofmap(root,depth,level,mp);
-    map<int,pair<int,int>>:: iterator it;
-    for(it=mp.begin();it!=mp.end();it++){
-        cout<<(it->second).first<<" ";
-    }
-    return;
+    view(root->left,hd-1,depth+1,mp);
+    view(root->right,hd+1,depth+1,mp);
 }
 
+void bottomView(Node *root)
+{
+   // Your Code Here
+   int hd=0;
+   int depth=0;
+   map<int,pair<int,int>>mp;
+   view(root,hd,depth,mp);
+   map<int,pair<int,int>>:: iterator it;
+   
+   for(it=mp.begin();it!=mp.end();it++)
+   {
+       cout<<(it->second).first<<" ";
+    }
+
+return ;
+}
