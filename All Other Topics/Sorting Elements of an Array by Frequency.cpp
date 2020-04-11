@@ -1,22 +1,41 @@
-void sortByFreq(int arr[],int n){
-    unordered_map<int,int>mp;
-    for( int i = 0; i < n; i++ ){
-        mp[arr[i]]++;
+#include<bits/stdc++.h>
+using namespace std;
+bool sortbysec(pair<int, int>a, pair<int, int>b){
+    if(a.first != b.first){
+        return (a.first)>(b.first);
     }
-    vector<pair<int,int> > v;
-    for( int i = 0; i < n; i++ ){
-        v.push_back({mp[arr[i]],arr[i]});
+    else if(a.first == b.first){
+        return (a.second < b.second);
     }
-    for( int i = 0; i < n; i++ ){
-        for( int j = i+1; j < n; j++ ){
-            if( v[i].first < v[j].first ){
-                swap(v[i],v[j]);
-            }
-            else if( (v[i].first == v[j].first)&&(v[i].second>v[j].second)){
-                swap(v[i],v[j]);
-            }
-        }
-    }
-    for( int i = 0; i < n; i++ )
-        cout << v[i].second << " ";
+}
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    int A[62];
+	    for(int i=0;i<62;i++){
+	        A[i]=0;
+	    }
+	    for(int i=0;i<n;i++){
+	        int x;
+	        cin>>x;
+	        A[x]++;
+	    }
+	    vector<pair<int,int> >V;
+	    for (int i=0; i<62; i++){ 
+	        if(A[i]>0){
+             V.push_back( make_pair(A[i], i) );
+	        }
+	    }
+	    sort(V.begin(), V.end(), sortbysec); 
+	    for (int i=0; i<V.size(); i++){
+	        for(int j=0;j<V[i].first;j++){
+	            cout<<V[i].second<<" ";
+	        }
+	    }
+	    cout<<endl;
+	}
+	return 0;
 }
