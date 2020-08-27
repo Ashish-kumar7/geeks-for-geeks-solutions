@@ -16,10 +16,12 @@ int main()
 	long long int max_area=0;
 	long long  int i;
 	 for( i=0;i<n;){
+
 	    if(S.empty() || A[S.top()]<=A[i]){
 	     S.push(i);
 	     i++;
 	    }
+
 	    else{
 	        int top=S.top();
 	        S.pop();
