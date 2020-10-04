@@ -4,9 +4,9 @@
 using namespace std;
 
 
-long long int uglyNo(int n){
+long long int uglyNo(int x){
     
-   long long int ugly[n] ;
+   long long int ugly[x] ;
    long long int i2 = 0 , i3 = 0 , i5 = 0 , i , j ;
    long long  int next_mul_2 = 2 ;
    long long int next_mul_3 = 3 ;
@@ -16,7 +16,7 @@ long long int next_mul_5 = 5 ;
   //  int ugly[n] ; 
     ugly[0] = 1 ;
     
-    for(i=1;i<n;i++){
+    for(i=1;i<x;i++){
          next = min(min(next_mul_2 , next_mul_3) , next_mul_5) ;
         
         ugly[i] = next ;
