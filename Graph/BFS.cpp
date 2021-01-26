@@ -1,17 +1,31 @@
-void bfs(int s, vector<int> adj[], bool vis[], int N)
-{
-    vis[s]=1;
-    queue<int>q;
-    q.push(s);
-    while(!q.empty()){
-       int u=q.front();
-        q.pop();
-        cout<<u<<" ";
-        for(int i =0;i<adj[u].size();i++){
-            if(vis[adj[u][i]]==0){
-                vis[adj[u][i]]=1;
-                q.push(adj[u][i]);
-            }
+class Solution {
+public:
+	vector<int>bfsOfGraph(int V, vector<int> adj[]){
+	    // Code here
+	      vector<int> r;
+	      vector<int>ans;
+	     queue<int> q;
+         q.push(0);
+        int vis[V];
+        for(int i=0;i<V;i++){
+            vis[i]=0;
         }
-    }
-}
+        vis[0]=1;
+        
+         while(!q.empty())
+         {
+             int p=q.front();
+             q.pop();
+             r.push_back(p);
+              for(int l=0;l<adj[p].size();l++)
+              {
+                  if(vis[adj[p][l]]==0)
+                    {
+                        q.push(adj[p][l]);
+                         vis[adj[p][l]]=1;
+                    }
+              }
+         }
+         return r;
+	}
+};
