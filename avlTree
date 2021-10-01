@@ -1,0 +1,86 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct TreeNode 
+{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+int height(TreeNode* root)
+{
+    if(!root) return 0;
+    return max(height(root->left), height(root->right)) + 1;
+}
+
+int getbalance(TreeNode* root)
+{
+    if(!root) return 0;
+    return height(root->left) - height(root->right);
+}
+
+TreeNode* leftRotation(TreeNode *root)
+{
+    TreeNode *x, *y;
+    x = root->right;
+    y = x->left;
+    
+    x->left = root;
+    root->right = y;
+    
+    return x;
+}
+
+TreeNode* rightRotation(TreeNode *root)
+{
+    TreeNode *x, *y;
+    x = root->left;
+    y = x->right;
+    
+    x->right = root;
+    root->left = y;
+    
+    return x;
+}
+
+TreeNode* insert(TreeNode* root, int value)
+{
+    if(!root) return new TreeNode(value);
+    if(value > root->val) root->right = insert(root->right, value);
+    else root->left = insert(root->left, value);
+    
+    int balance = getbalance(root);
+    
+    if(balance > 1 && value < root->left->val)
+    {
+        return rightRotation(root); 
+    }
+    if(balance > 1 && value > root->left->val) 
+    {
+        root->left = leftRotation(root->left);
+        return rightRotation(root);
+    }
+    if(balance < -1 && value < root->right->val)
+    {
+        root->right = rightRotation(root->right);
+        return leftRotation(root);
+    }
+    if(balance < -1 && value > root->right->val) return leftRotation(root);
+    
+    return root;
+    
+}
+
+TreeNode* sortedArrayToBST(vector<int>& nums) 
+{
+    int n = nums.size();
+    TreeNode *root = NULL;
+    
+    for(int i = 0; i < n; ++i) 
+    {
+        root = insert(root, nums[i]);
+    }
+    return root;
+}
