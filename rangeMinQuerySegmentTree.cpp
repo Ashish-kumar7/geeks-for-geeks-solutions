@@ -26,11 +26,13 @@ vector<int> constructST(vector<int> input, int n)
 int findMinUtil(vector<int> st, int qs, int qe, int ss, int se, int si)
 {
 
-    if (ss >= qs && se <= qe)
+    if (ss >= qs && se <= qe){
         return st[si];
+}
 
-    if (qs > se || qe < ss)
+    if (qs > se || qe < ss){
         return INT_MAX;
+}
     int mid = ss + (se - ss) / 2;
     return min(findMinUtil(st, qs, qe, ss, mid, si * 2 + 1), findMinUtil(st, qs, qe, mid + 1, se, si * 2 + 2));
 }
