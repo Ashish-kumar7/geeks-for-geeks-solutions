@@ -21,7 +21,7 @@ class Solution {
 int main() {
     int t;
     cin >> t;
-    while (t--) {
+    while (t--) 
         int n, k;
         cin >> k;
         cin >> n;
