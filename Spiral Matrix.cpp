@@ -1,43 +1,50 @@
-lass Solution{
-
-	public:
-	int findK(vector<vector<int>> &matrix, int n, int m, int k)
-    {
-        // Your code goes here
-         int temp=m;
-        m=n;
-        n=temp;
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
         
-         int r=0;
-        int c=0;
-        int count=0;
-        vector<int>ans(m*n);
+        vector<int>var;
+        int row=matrix.size();
+        int col=matrix[0].size();
         
-        while(r<m && c<n){
-            for(int i=c;i<n;i++){
-                ans[count++]=matrix[r][i];
+        int starting_row=0;
+        int starting_col=0;
+        int ending_row=row-1;
+        int ending_col=col-1;
+        int count =0;
+        int total = row*col;
+        
+        
+        while(count < total)
+        {
+           //starting row
+            for(int i = starting_row; count<total && i<=ending_col;i++)
+            {
+                var.push_back(matrix[starting_row][i]);
+                count++;
             }
-            r++;
-            for(int i=r;i<m;i++){
-                ans[count++]=matrix[i][n-1];
+            starting_row++;
+            //for ending_col
+            for(int i=starting_row;count<total && i<=ending_row;i++)
+            {
+                var.push_back(matrix[i][ending_col]);
+                    count++;
             }
-            n--;
-            
-            if(r<m){
-                    for(int i=n-1;i>=c;i--){
-                    ans[count++]=matrix[m-1][i];
-                }
-                m--;
+            ending_col--;
+            //ending_row
+            for(int i=ending_col;count<total && i>=starting_col;i--)
+            {
+                var.push_back(matrix[ending_row][i]);
+                    count++;
             }
-            if(c<n){
-                for(int i=m-1;i>=r;i--){
-                    ans[count++]=matrix[i][c];
-                }
-                c++;
-            }   
+            ending_row--;
+            //staring col
+            for(int i=ending_row;count<total && i>=starting_row;i--)
+            {
+                var.push_back(matrix[i][starting_col]);
+                count++;
+            }
+            starting_col++;
         }
-        
-        return ans[k-1];
+        return var;
     }
-
 };
