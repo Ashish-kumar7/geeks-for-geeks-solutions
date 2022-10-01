@@ -1,14 +1,16 @@
-
-int areMirror(Node* a, Node* b)
-{
-   // Your code here
-   if(a==NULL && b==NULL)
-   {
-       return 1;
-   }
-    if(a==NULL ||  b==NULL)
-   {
-       return 0;
-   }
-   return a->data == b->data  && areMirror(a->left,b->right) && areMirror(a->right,b->left);  
-}
+bool solver(TreeNode* root1,TreeNode* root2)
+    { 
+         if(root1 == NULL && root2 == NULL)
+             return true;
+         if(root1 == NULL && root2 != NULL)
+            return false;
+         if(root1 != NULL && root2 == NULL) 
+            return false;
+         if(root1->val != root2->val) // main step check if both the values are same of not
+             return false;
+         
+         bool opt1 = solver(root1->left,root2->right); 
+         bool opt2 = solver(root1->right,root2->left);
+         return opt1 && opt2;
+        
+    }
