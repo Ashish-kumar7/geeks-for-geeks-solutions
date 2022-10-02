@@ -4,7 +4,7 @@
 import java.util.*;
  
 // Main Class
-public class Solution {
+public class TriplyLinkedList {
  
     // First let us create a Node class
     class Node {
